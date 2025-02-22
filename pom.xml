@@ -103,6 +103,7 @@
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
                 <version>${jaxb-api}</version>
+                <scope>provided</scope>
             </dependency>
 
             <!-- poi -->
@@ -120,8 +121,10 @@
             <dependency>
                 <groupId>com.github.wechatpay-apiv3</groupId>
                 <artifactId>wechatpay-apache-httpclient</artifactId>
-                <version>0.4.8</version>
+                <version>0.4.9</version>
             </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 </project>

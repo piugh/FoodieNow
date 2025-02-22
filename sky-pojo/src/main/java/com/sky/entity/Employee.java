@@ -16,21 +16,21 @@ public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private Long id;    //唯一
 
     private String username;
 
     private String name;
 
-    private String password;
+    private String password;    //默认密码是123456
 
-    private String phone;
+    private String phone;   //手机号符合正则表达式
 
     private String sex;
 
-    private String idNumber;
+    private String idNumber;    //身份证号符合正则表达式
 
-    private Integer status;
+    private Integer status;     //默认1-允许操作；0-禁止操作
 
     //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
