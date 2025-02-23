@@ -32,6 +32,7 @@ public class GlobalExceptionHandler {
      * @param ex
      * @return
      */
+    @ExceptionHandler
     public Result exceptionHandler(SQLIntegrityConstraintViolationException ex){
         String message = ex.getMessage();
         log.info("异常现象{}", ex.getMessage());
