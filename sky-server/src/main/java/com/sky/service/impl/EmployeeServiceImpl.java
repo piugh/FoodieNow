@@ -85,15 +85,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /**
-     * 员工分页查询
-     * @param employeePageQueryDTO
-     * @return
+     * 编辑员工信息
+     * @param employeeDTO
      */
     @Override
-    public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
-        PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
-        Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);
-        return new PageResult(page.getTotal(), page.getResult());
+    public void update(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO, employee);
+        employeeMapper.update(employee);
     }
 
     /**
@@ -109,6 +108,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
+    @Override
+    public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
+        PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
+        Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);
+        return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    /**
      * 根据id查询员工
      * @param id
      * @return
@@ -118,17 +129,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = employeeMapper.getById(id);
         employee.setPassword("******");
         return employee;
-    }
-
-    /**
-     * 编辑员工信息
-     * @param employeeDTO
-     */
-    @Override
-    public void update(EmployeeDTO employeeDTO) {
-        Employee employee = new Employee();
-        BeanUtils.copyProperties(employeeDTO, employee);
-        employeeMapper.update(employee);
     }
 
 }

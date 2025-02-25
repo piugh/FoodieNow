@@ -58,18 +58,6 @@ public class DishServiceImpl implements DishService {
     }
 
     /**
-     * 菜品分页查询
-     * @param dishQueryDTO
-     * @return
-     */
-    @Override
-    public PageResult page(DishPageQueryDTO dishQueryDTO) {
-        PageHelper.startPage(dishQueryDTO.getPage(), dishQueryDTO.getPageSize());
-        Page<DishVO> page = dishMapper.pageQuery(dishQueryDTO);
-        return new PageResult(page.getTotal(), page.getResult());
-    }
-
-    /**
      * 菜品批量删除
      * @param ids
      */
@@ -96,23 +84,6 @@ public class DishServiceImpl implements DishService {
     }
 
     /**
-     * 根据id查询菜品和口味数据
-     * @param id
-     * @return
-     */
-    @Override
-    public DishVO getByIdWithFlavor(Long id) {
-        //菜品信息
-        Dish dish = dishMapper.getById(id);
-        //口味信息
-        List<DishFlavor> dishFlavors = dishFlavorMapper.getByDishId(id);
-        DishVO dishVO = new DishVO();
-        BeanUtils.copyProperties(dish, dishVO);
-        dishVO.setFlavors(dishFlavors);
-        return dishVO;
-    }
-
-    /**
      * 根据id修改菜品信息和对应口味信息
      * @param dishDTO
      */
@@ -134,5 +105,46 @@ public class DishServiceImpl implements DishService {
             }
             dishFlavorMapper.insertBatch(dishFlavors);
         }
+    }
+
+    /**
+     * 菜品分页查询
+     * @param dishQueryDTO
+     * @return
+     */
+    @Override
+    public PageResult page(DishPageQueryDTO dishQueryDTO) {
+        PageHelper.startPage(dishQueryDTO.getPage(), dishQueryDTO.getPageSize());
+        Page<DishVO> page = dishMapper.pageQuery(dishQueryDTO);
+        return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    /**
+     * 根据id查询菜品和口味数据
+     * @param id
+     * @return
+     */
+    @Override
+    public DishVO getByIdWithFlavor(Long id) {
+        //菜品信息
+        Dish dish = dishMapper.getById(id);
+        //口味信息
+        List<DishFlavor> dishFlavors = dishFlavorMapper.getByDishId(id);
+        DishVO dishVO = new DishVO();
+        BeanUtils.copyProperties(dish, dishVO);
+        dishVO.setFlavors(dishFlavors);
+        return dishVO;
+    }
+
+    /**
+     * 动态查询菜品
+     * @param dish
+     * @return
+     */
+    @Override
+    public List<Dish> list(Dish dish) {
+        dish.setStatus(StatusConstant.ENABLE);
+        List<Dish> list = dishMapper.list(dish);
+        return list;
     }
 }

@@ -36,19 +36,6 @@ public class CategoryController {
     }
 
     /**
-     * 分类分页查询
-     * @param categoryPageQueryDTO
-     * @return
-     */
-    @GetMapping("/page")
-    @ApiOperation("分类分页查询")
-    public Result<PageResult> page(CategoryPageQueryDTO categoryPageQueryDTO){
-        log.info("分页查询：{}", categoryPageQueryDTO);
-        PageResult pageResult = categoryService.pageQuery(categoryPageQueryDTO);
-        return Result.success(pageResult);
-    }
-
-    /**
      * 删除分类
      * @param id
      * @return
@@ -84,6 +71,19 @@ public class CategoryController {
     public Result<String> startOrStop(@PathVariable("status") Integer status, Long id){
         categoryService.startOrStop(status,id);
         return Result.success();
+    }
+
+    /**
+     * 分类分页查询
+     * @param categoryPageQueryDTO
+     * @return
+     */
+    @GetMapping("/page")
+    @ApiOperation("分类分页查询")
+    public Result<PageResult> page(CategoryPageQueryDTO categoryPageQueryDTO){
+        log.info("分页查询：{}", categoryPageQueryDTO);
+        PageResult pageResult = categoryService.pageQuery(categoryPageQueryDTO);
+        return Result.success(pageResult);
     }
 
     /**

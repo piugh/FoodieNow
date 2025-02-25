@@ -1,6 +1,7 @@
 package com.sky.controller.admin;
 
 
+import com.sky.annotation.BatchDelet;
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
@@ -19,7 +20,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequestMapping("/admin/dish")
-@Api("菜品相关接口")
+@Api(tags = "菜品相关接口")
 public class DishController {
 
     @Autowired
@@ -39,6 +40,33 @@ public class DishController {
     }
 
     /**
+     * 批量删除菜品
+     * @param ids
+     * @return
+     */
+    @DeleteMapping
+    @ApiOperation("删除菜品")
+    @BatchDelet
+    public Result delete(@RequestParam List<Long> ids) {
+        log.info("删除菜品：{}", ids);
+        dishService.deleteBatch(ids);
+        return Result.success();
+    }
+
+    /**
+     * 修改菜品
+     * @param dishDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("修改菜品")
+    public Result update(@RequestBody DishDTO dishDTO) {
+        log.info("修改菜品：{}", dishDTO);
+        dishService.updateWithFlavor(dishDTO);
+        return Result.success();
+    }
+
+    /**
      * 菜品分页查询
      * @param dishQueryDTO
      * @return
@@ -49,19 +77,6 @@ public class DishController {
         log.info("菜品分页查询：{}", dishQueryDTO);
         PageResult pageResult = dishService.page(dishQueryDTO);
         return Result.success(pageResult);
-    }
-
-    /**
-     * 批量删除菜品
-     * @param ids
-     * @return
-     */
-    @DeleteMapping
-    @ApiOperation("删除菜品")
-    public Result delete(@RequestParam List<Long> ids) {
-        log.info("删除菜品：{}", ids);
-        dishService.deleteBatch(ids);
-        return Result.success();
     }
 
     /**
@@ -76,18 +91,17 @@ public class DishController {
         return Result.success(dishVO);
     }
 
-
     /**
-     * 修改菜品
-     * @param dishDTO
+     * 查询菜品
+     * @param dish
      * @return
      */
-    @PutMapping
-    @ApiOperation("修改菜品")
-    public Result update(@RequestBody DishDTO dishDTO) {
-        log.info("修改菜品：{}", dishDTO);
-        dishService.updateWithFlavor(dishDTO);
-        return Result.success();
+    @GetMapping("/list")
+    @ApiOperation("动态查询菜品")
+    public Result<List<Dish>> list(@ModelAttribute Dish dish) {
+        log.info("动态查询菜品:{}",dish);
+        List<Dish> list = dishService.list(dish);
+        return Result.success(list);
     }
 
 }

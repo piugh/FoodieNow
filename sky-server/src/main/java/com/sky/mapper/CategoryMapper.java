@@ -26,13 +26,6 @@ public interface CategoryMapper {
     void insert(Category category);
 
     /**
-     * 分类分页查询
-     * @param categoryPageQueryDTO
-     * @return
-     */
-    Page<Category> pageQuery(CategoryPageQueryDTO categoryPageQueryDTO);
-
-    /**
      * 根据id删除分类
      * @param id
      */
@@ -47,10 +40,19 @@ public interface CategoryMapper {
     void update(Category category);
 
     /**
+     * 分类分页查询
+     * @param categoryPageQueryDTO
+     * @return
+     */
+    Page<Category> pageQuery(CategoryPageQueryDTO categoryPageQueryDTO);
+
+    /**
      * 根据类型查询分类
      * @param type
      * @return
      */
     List<Category> getByType(Integer type);
+
+
 
 }

@@ -11,3 +11,7 @@ sky:
     access-key-id: LTAI5t6Ug244SgiDgqgGfaFj
     access-key-secret: txUx7iHN95stA9x8MtHCOW6XeATLIA
     bucket-name: web-gh05
+  redis:
+    host: localhost
+    port: 6379
+    database: 0

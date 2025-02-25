@@ -14,15 +14,6 @@ import org.apache.ibatis.annotations.Update;
 public interface EmployeeMapper {
 
     /**
-     * 根据用户名查询员工
-     * @param username
-     * @return
-     */
-    @Select("select * from sky_take_out.employee where username = #{username}")
-    Employee getByUsername(String username);
-
-
-    /**
      * 插入员工数据
      * @param employee
      */
@@ -34,11 +25,12 @@ public interface EmployeeMapper {
     void insert(Employee employee);
 
     /**
-     * 员工分页查询
-     * @param employeePageQueryDTO
+     * 根据用户名查询员工
+     * @param username
      * @return
      */
-    Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+    @Select("select * from sky_take_out.employee where username = #{username}")
+    Employee getByUsername(String username);
 
     /**
      * 员工信息更新
@@ -46,6 +38,13 @@ public interface EmployeeMapper {
      */
     @AutoFill(OperationType.UPDATE)
     void update(Employee employee);
+
+    /**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
+    Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
     /**
      * 根据id查询员工
