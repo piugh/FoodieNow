@@ -53,6 +53,4 @@ public interface CategoryMapper {
      */
     List<Category> getByType(Integer type);
 
-
-
 }
