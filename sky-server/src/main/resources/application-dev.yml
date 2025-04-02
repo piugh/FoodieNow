@@ -3,18 +3,18 @@ sky:
     driver-class-name: com.mysql.cj.jdbc.Driver
     host: localhost
     port: 3306
-    database: sky_take_out
+    database: ******
     username: root
-    password: 1234
+    password: ****
   alioss:
     endpoint: oss-cn-beijing.aliyuncs.com
-    access-key-id: LTAI5t6Ug244SgiDgqgGfaFj
-    access-key-secret: txUx7iHN95stA9x8MtHCOW6XeATLIA
-    bucket-name: web-gh05
+    access-key-id: *******************
+    access-key-secret: ********************
+    bucket-name: ***********
   redis:
     host: localhost
     port: 6379
     database: 0
   wechat:
-    appid: wx2e0eb68b9d1560cb
-    secret: ad2729e6fa52d20b13fd345ba028354d
+    appid: **********************
+    secret: ***************************
